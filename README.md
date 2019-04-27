@@ -1,2 +1,4 @@
 # Loopt
-Loop Optimizer
+Loop Optimizer - Dependence analysis and simple loop transformations
+
+In the lectures we have learnt about dependences in loops. For the examples given it was easy to manually determine dependence distances and vectors. Compilers use automatic dependence tests. Study the literature and describe these dependence tests. What are the conditions so that dependences can be determined and how is that done? Consider also techniques based on the polyhedral approach for dependence analysis and dependence modelling.In some cases we can transform a loop with inter-iteration dependences into a loop without such dependences. We saw the example of loop shifting in the lecture. Investigate what loop transformations exist, how they work and when they can be applied. Document that systematically. Implement a dependence test with a number of these loop transformations where you take as input a code snippet (in Java) with a loop and output a transformed loop (in Java). You can use libraries and tools to help you do this.
