@@ -9,13 +9,14 @@ import spoon.Launcher;
 import spoon.reflect.CtModel;
 import spoon.reflect.code.CtArrayRead;
 import spoon.reflect.code.CtArrayWrite;
+import spoon.reflect.code.CtBinaryOperator;
+import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtFor;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtLoop;
 import spoon.reflect.code.CtStatement;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtType;
+import spoon.reflect.code.CtTypeAccess;
+import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.filter.TypeFilter;
 import SoftEng751.SoftEng751.testClass;
@@ -33,12 +34,11 @@ public class App
     	str = str.replaceAll("package SoftEng751.SoftEng751;", "");
     	CtClass l = Launcher.parseClass(str);
     	CtFor loop = l.getMethod("transformLoop").getElements(new TypeFilter<CtFor>(CtFor.class)).get(0);
+    	CtExpression ex = loop.getElements(new TypeFilter<CtExpression>(CtExpression.class)).get(1);
+    	System.out.println(ex.getElements(new TypeFilter<CtTypeAccess>(CtTypeAccess.class)).get(0));
     	
-    	System.out.println( loop.getElements(new TypeFilter<CtStatement>(CtStatement.class)).get(3) );
     	
-
-        
-        
+    	
     }
     
 
