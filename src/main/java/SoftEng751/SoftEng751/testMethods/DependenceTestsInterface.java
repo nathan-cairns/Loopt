@@ -1,11 +1,11 @@
 package SoftEng751.SoftEng751.testMethods;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import spoon.reflect.code.CtFor;
 
 public interface DependenceTestsInterface {
 
-	public ArrayList<Dependency> outputDependencies(CtFor pretransformedLoop);
+	public HashMap<DependenceNode,DependenceNode> outputDependencies(CtFor pretransformedLoop);
 	
 }
