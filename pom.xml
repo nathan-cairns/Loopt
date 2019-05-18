@@ -21,6 +21,11 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+	    <dependency>
+	  <groupId>org.ejml</groupId>
+	  <artifactId>ejml-all</artifactId>
+	  <version>0.37.1</version>
+	</dependency>
     <dependency>
     <groupId>fr.inria.gforge.spoon</groupId>
     <artifactId>spoon-core</artifactId>

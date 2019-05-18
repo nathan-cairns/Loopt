@@ -2,15 +2,20 @@ package SoftEng751.SoftEng751;
 
 public class testClass {
 
+	int[][] A;
+	
 	public void transformLoop(){
 
-	    	int[] x = {0,1,2,3,4}; 
-	    	for(int i = 1; i < 5; i++){
-	        	x[i] = x[i+1];
-	        	System.out.println("hello");
-	        	
-	        }
-	    
+	    	for(int i = 0; i < 6; i++){
+	    		
+	    		for(int j = 0; j < 5; j++)
+	    		{
+	    			
+	    			A[i][j] = A[i-1][j-1] + 1;
+	    			
+	    		}
+	    		
+	    	}
 		
 	} 
 	

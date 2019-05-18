@@ -1,7 +1,9 @@
 package SoftEng751.SoftEng751;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
@@ -20,6 +22,9 @@ import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.filter.TypeFilter;
 import SoftEng751.SoftEng751.testClass;
+import SoftEng751.SoftEng751.testMethods.AffineTransformation;
+import SoftEng751.SoftEng751.testMethods.LoopVar;
+
 import static spoon.testing.utils.ModelUtils.build;
 
 /**
@@ -34,9 +39,18 @@ public class App
     	str = str.replaceAll("package SoftEng751.SoftEng751;", "");
     	CtClass l = Launcher.parseClass(str);
     	CtFor loop = l.getMethod("transformLoop").getElements(new TypeFilter<CtFor>(CtFor.class)).get(0);
-    	CtExpression ex = loop.getElements(new TypeFilter<CtExpression>(CtExpression.class)).get(1);
-    	System.out.println(ex.getElements(new TypeFilter<CtTypeAccess>(CtTypeAccess.class)).get(0));
+    	List<CtExpression> ex = loop.getElements(new TypeFilter<CtExpression>(CtExpression.class));
     	
+    	
+    	AffineTransformation m = new AffineTransformation();
+    	
+		LoopVar i = new LoopVar("i",1,5);
+		LoopVar j = new LoopVar("j",1,6);
+		ArrayList<LoopVar> variables = new ArrayList<LoopVar>();
+		variables.add(i);
+		variables.add(j);
+		
+		ArrayList<LoopVar> transformedVariables = m.method(variables);
     	
     	
     }
