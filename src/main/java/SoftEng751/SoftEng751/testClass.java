@@ -10,9 +10,9 @@ public class testClass {
 	    		
 	    		for(int j = 0; j < 5; j++)
 	    		{
-	    			
-	    			A[i][j] = A[i-1][j-1] + 1;
-	    			
+
+	    			A[i][j] = A[i-1][j+1] + 1;
+
 	    		}
 	    		
 	    	}
