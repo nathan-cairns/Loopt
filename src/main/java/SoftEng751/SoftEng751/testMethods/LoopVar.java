@@ -6,9 +6,9 @@ public class LoopVar {
 	public String transformedname = "";
 	public int lowerbound;
 	public int upperbound;
+	public int codeLine; 
 	
-	
-	public LoopVar(String _name, int _lowerbound, int _upperbound){
+	public LoopVar(String _name, int _lowerbound, int _upperbound, int codeLine){
 		
 		name = _name;
 		lowerbound = _lowerbound;

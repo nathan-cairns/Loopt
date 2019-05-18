@@ -45,11 +45,11 @@ public class AffineTransformation {
 					
 				}else if(coef == 1){
 					
-					current.transformedname += variables.get(v).name;
+					current.transformedname += variables.get(v).name + "'";
 					
 				}else{
 					
-					current.transformedname += String.format("%d%s ", coef, variables.get(v).name);
+					current.transformedname += String.format("%d%s' ", coef, variables.get(v).name);
 					
 				}
 					

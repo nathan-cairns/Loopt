@@ -24,6 +24,8 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import SoftEng751.SoftEng751.testClass;
 import SoftEng751.SoftEng751.testMethods.AffineTransformation;
 import SoftEng751.SoftEng751.testMethods.LoopVar;
+import SoftEng751.SoftEng751.io.DefaultOutParser;
+import SoftEng751.SoftEng751.io.OutputParser;
 
 import static spoon.testing.utils.ModelUtils.build;
 
@@ -44,14 +46,14 @@ public class App
     	
     	AffineTransformation m = new AffineTransformation();
     	
-		LoopVar i = new LoopVar("i",1,5);
-		LoopVar j = new LoopVar("j",1,6);
+		LoopVar i = new LoopVar("i",1,5,0);
+		LoopVar j = new LoopVar("j",1,6,1);
 		ArrayList<LoopVar> variables = new ArrayList<LoopVar>();
 		variables.add(i);
 		variables.add(j);
 		
 		ArrayList<LoopVar> transformedVariables = m.method(variables);
-    	
+		
     	
     }
     

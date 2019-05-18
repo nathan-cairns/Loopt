@@ -8,7 +8,7 @@ import spoon.reflect.code.CtFor;
 public class DefaultOutParser implements OutputParser {
 
 	public void output(List<LoopVar> transformedLoopVars, CtFor originalLoop) {
-		// TODO Auto-generated method stub
+		System.out.println(originalLoop.toString());
 		
 	}
 	
