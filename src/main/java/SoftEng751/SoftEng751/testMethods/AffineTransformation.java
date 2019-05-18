@@ -3,6 +3,7 @@ package SoftEng751.SoftEng751.testMethods;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import org.ejml.data.DMatrixRMaj;
 import org.ejml.equation.Equation;
@@ -10,7 +11,7 @@ import org.ejml.equation.Equation;
 public class AffineTransformation {
 
 	
-	public ArrayList<LoopVar> method(ArrayList<LoopVar> variables){
+	public List<LoopVar> method(List<LoopVar> variables){
 		
 		
 		DMatrixRMaj x = new DMatrixRMaj(4, 2); //fixed for 2vars

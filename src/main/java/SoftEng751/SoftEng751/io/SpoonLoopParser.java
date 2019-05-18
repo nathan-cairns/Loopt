@@ -2,7 +2,6 @@ package SoftEng751.SoftEng751.io;
 
 import SoftEng751.SoftEng751.testMethods.LoopVar;
 import spoon.Launcher;
-import spoon.reflect.code.CtConditional;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtFor;
 import spoon.reflect.declaration.CtClass;
@@ -40,7 +39,6 @@ public class SpoonLoopParser implements LoopParser {
 
     private LoopVar getLoopVarFromLoop(CtFor loop) {
         List<CtExpression> expressions = loop.getElements(new TypeFilter<CtExpression>(CtExpression.class));
-
         String name = expressions.get(2).toString();
         int lowerbound = Integer.parseInt(expressions.get(0).toString());
         int upperbound = Integer.parseInt(expressions.get(3).toString());
