@@ -5,5 +5,5 @@ import SoftEng751.SoftEng751.testMethods.LoopVar;
 import java.util.List;
 
 public interface InputParser {
-    public List<LoopVar> parse(String filepath);
+    List<LoopVar> parse(String filepath);
 }
