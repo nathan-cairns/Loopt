@@ -29,6 +29,7 @@ release.properties
 *.iws
 out/
 .idea_modules/
+stale_outputs_checked
 
 ##########################
 ## Eclipse
