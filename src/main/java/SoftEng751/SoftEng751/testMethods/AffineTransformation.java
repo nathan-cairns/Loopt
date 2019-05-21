@@ -34,29 +34,46 @@ public class AffineTransformation {
 			LoopVar current = variables.get(u);
 			for(int v = 0; v < variables.size(); v++){
 				
-				int coef = (int) tdash.get(u, v);
+				int coefTDash = (int) tdash.get(u, v);
+				int coefT = (int) t.get(u, v);
 				
 
-				if(coef > 0 && v >= 1){
+				if(coefTDash > 0 && v >= 1){
 					
 					current.transformedname += "+ ";
 				}
 				
-				if(coef == 0){
+				if(coefTDash == 0){
 					
-				}else if(coef == 1){
+				}else if(coefTDash == 1){
 					
-					current.transformedname += variables.get(v).name + "'";
+					current.transformedname += variables.get(v).name + "1";
 					
 				}else{
 					
-					current.transformedname += String.format("%d%s' ", coef, variables.get(v).name);
+					current.transformedname += String.format("%d * %s1 ", coefTDash, variables.get(v).name);
 					
 				}
+				
+				if(coefT > 0 && v >= 1){
+					
+					current.boundsName += "+ ";
+				}
+				
+				if(coefT == 0){
+					
+				}else if(coefT == 1){
+					
+					current.boundsName += variables.get(v).name + "1";
+					
+				}else{
+					
+					current.boundsName += String.format("%d * %s1 ", coefT, variables.get(v).name);
+					
+				}
+				
 					
 			}
-			
-			System.out.println(current.transformedname);
 		}
 		
 		

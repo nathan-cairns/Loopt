@@ -12,9 +12,9 @@ import java.util.List;
 
 public class SpoonLoopParser implements LoopParser {
 
-    @Override
+
     public List<LoopVar> getLoopVars(String file, String methodName) throws Exception {
-        List<LoopVar> loopVariables = new ArrayList<>();
+        List<LoopVar> loopVariables = new ArrayList<LoopVar>();
 
         CtClass parsedClass = Launcher.parseClass(file);
     	List<CtFor> loops = parsedClass.getMethod(methodName).getElements(new TypeFilter<CtFor>(CtFor.class));
