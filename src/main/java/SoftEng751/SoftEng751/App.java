@@ -23,8 +23,8 @@ public class App
     	String str = FileUtils.readFileToString(new File("./src/main/java/SoftEng751/SoftEng751/testClass.java"));
     	str = str.replaceAll("package SoftEng751.SoftEng751;", "");
 
-		LoopParser loopParser = new SpoonLoopParser();
-		List<LoopVar> loopvariables = loopParser.getLoopVars(str, "transformLoop");
+		LoopParser loopParser = new SpoonLoopParser(str, "transformLoop");
+		List<LoopVar> loopvariables = loopParser.getLoopVars();
     	AffineTransformation m = new AffineTransformation();
 		List<LoopVar> transformedVariables = m.method(loopvariables);
 		
