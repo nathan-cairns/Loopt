@@ -27,12 +27,8 @@ public class App
     	AffineTransformation m = new AffineTransformation();
 		List<LoopVar> transformedVariables = m.method(loopvariables);
 		
-		
-		CtClass parsedClass = Launcher.parseClass(str);
-    	List<CtFor> loops = parsedClass.getMethod("transformLoop").getElements(new TypeFilter<CtFor>(CtFor.class));
-    	
     	OutputParser out = new DefaultOutParser();
-    	out.output(transformedVariables, loops.get(0));
+    	out.output(transformedVariables, loopParser.getOutermostLoop());
     	
     	
 		

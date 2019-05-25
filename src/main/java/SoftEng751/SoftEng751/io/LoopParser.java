@@ -9,4 +9,6 @@ public interface LoopParser {
     List<LoopVar> getLoopVars();
 
     List<int[]> getDependencyVectors();
+    
+    CtFor getOutermostLoop();
 }
