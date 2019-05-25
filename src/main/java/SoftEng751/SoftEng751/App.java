@@ -11,27 +11,24 @@ import org.apache.commons.io.FileUtils;
 
 import SoftEng751.SoftEng751.testMethods.AffineTransformation;
 import SoftEng751.SoftEng751.testMethods.LoopVar;
-import spoon.Launcher;
-import spoon.reflect.code.CtFor;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.visitor.filter.TypeFilter;
 
 public class App 
 {
     public static void main( String[] args ) throws Exception
     {
+    	// Input parsing
     	String str = FileUtils.readFileToString(new File("./testFor.txt"));
-
 		LoopParser loopParser = new SpoonLoopParser(str);
 		List<LoopVar> loopvariables = loopParser.getLoopVars();
+		
+		// Transformation
     	AffineTransformation m = new AffineTransformation();
 		List<LoopVar> transformedVariables = m.method(loopvariables);
 		
+		// Output generation
     	OutputParser out = new DefaultOutParser();
-    	out.output(transformedVariables, loopParser.getOutermostLoop());
-    	
-    	
-		
+    	String outString = out.output(transformedVariables, loopParser.getOutermostLoop());
+    	System.out.print(outString);
     }
     
 
