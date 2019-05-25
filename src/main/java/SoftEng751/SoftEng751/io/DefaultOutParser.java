@@ -16,8 +16,6 @@ public class DefaultOutParser implements OutputParser {
 	public String output(List<LoopVar> transformedLoopVars, CtFor originalLoop) {
 
 		Launcher spoon = new Launcher();
-		CtFor newFor = spoon.getFactory().Core().createFor();
-		//newFor.addForInit();
 		
 		CtFor loop = originalLoop;
 		
