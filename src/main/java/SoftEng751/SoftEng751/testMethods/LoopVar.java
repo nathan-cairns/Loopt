@@ -19,5 +19,4 @@ public class LoopVar {
 	public String getName() {
 		return this.name;
 	}
-	
 }
