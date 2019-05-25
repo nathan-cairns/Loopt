@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class SpoonLoopParser implements LoopParser {
 
     private List<CtFor> loops;
+    private List<LoopVar> loopVars;
 
     public SpoonLoopParser(String file, String methodName) throws Exception {
         CtClass parsedClass = Launcher.parseClass(file);
@@ -29,6 +30,9 @@ public class SpoonLoopParser implements LoopParser {
     }
 
     public List<LoopVar> getLoopVars(){
+        if (this.loopVars != null) {
+            return loopVars;
+        }
         List<LoopVar> loopVariables = new ArrayList<LoopVar>();
 
         LoopVar i = this.getLoopVarFromLoop(this.loops.get(0));
@@ -38,20 +42,18 @@ public class SpoonLoopParser implements LoopParser {
             loopVariables.add(j);
         }
 
-    	return loopVariables;
+        this.loopVars = loopVariables;
+    	return this.loopVars;
     }
 
     public List<DependencyVector> getDependencyVectors() {
         List<DependencyVector> dependencyVectors = new ArrayList<DependencyVector>();
-        List<String> variables = this.getLoopVars()
-                .stream()
-                .map(loopVariable -> (loopVariable.getName()))
-                .collect(Collectors.toList());
+        List<String> loopVarNames = this.getLoopVarNames();
         List<CtArrayRead> arrayReads = this.loops.get(0).getElements(new TypeFilter<CtArrayRead>(CtArrayRead.class));
 
         for (int i = 1; i < arrayReads.size(); i += 3) {
             List<CtBinaryOperator> readExpressions = arrayReads.get(i).getElements(new TypeFilter<CtBinaryOperator>(CtBinaryOperator.class));
-            DependencyVector dependencyVector = new DependencyVector(variables);
+            DependencyVector dependencyVector = new DependencyVector(loopVarNames);
 
             for (CtBinaryOperator expression : readExpressions) {
                 try {
@@ -76,7 +78,7 @@ public class SpoonLoopParser implements LoopParser {
                     if (dependencyVector.getDependencyDistance(variable) > 0) {
                         // This code will execute if we have an access like A[j+1][j-1]
                         // this is becuz these should be two different vectors
-                        DependencyVector secondaryDp = new DependencyVector(variables);
+                        DependencyVector secondaryDp = new DependencyVector(loopVarNames);
                         secondaryDp.setDistance(variable, distance);
                         dependencyVectors.add(secondaryDp);
                     } else {
@@ -91,6 +93,13 @@ public class SpoonLoopParser implements LoopParser {
         }
 
         return dependencyVectors;
+    }
+
+    private List<String> getLoopVarNames() {
+        return this.getLoopVars()
+                .stream()
+                .map(loopVariable -> (loopVariable.getName()))
+                .collect(Collectors.toList());
     }
 
     private LoopVar getLoopVarFromLoop(CtFor loop) {
