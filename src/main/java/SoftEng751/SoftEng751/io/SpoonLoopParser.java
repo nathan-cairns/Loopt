@@ -3,6 +3,9 @@ package SoftEng751.SoftEng751.io;
 import SoftEng751.SoftEng751.testMethods.DependencyVector;
 import SoftEng751.SoftEng751.testMethods.LoopVar;
 import spoon.Launcher;
+import spoon.reflect.code.CtExpression;
+import spoon.reflect.code.CtFor;
+import spoon.reflect.code.CtStatement;
 import spoon.reflect.code.*;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.compiler.SnippetCompilationHelper;
@@ -12,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SpoonLoopParser implements LoopParser {
+
 
     private List<CtFor> loops;
     private List<LoopVar> loopVars;
@@ -37,6 +41,7 @@ public class SpoonLoopParser implements LoopParser {
     public CtFor getOutermostLoop() {
     	return this.loops.get(0);
     }
+
 
     public List<LoopVar> getLoopVars(){
         if (this.loopVars != null) {
@@ -104,11 +109,13 @@ public class SpoonLoopParser implements LoopParser {
         return dependencyVectors;
     }
 
+
     private List<String> getLoopVarNames() {
         return this.getLoopVars()
                 .stream()
                 .map(loopVariable -> (loopVariable.getName()))
                 .collect(Collectors.toList());
+
     }
 
     private LoopVar getLoopVarFromLoop(CtFor loop, int dimension) {
