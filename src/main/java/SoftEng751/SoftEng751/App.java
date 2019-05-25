@@ -25,7 +25,7 @@ public class App
 
     	AffineTransformation m = new AffineTransformation();
 		List<LoopVar> transformedVariables = m.method(loopvariables);
-		
+
 		// Output generation
     	OutputParser out = new DefaultOutParser();
     	String outString = out.output(transformedVariables, loopParser.getOutermostLoop());
