@@ -7,6 +7,7 @@ import SoftEng751.SoftEng751.io.DefaultOutParser;
 import SoftEng751.SoftEng751.io.LoopParser;
 import SoftEng751.SoftEng751.io.OutputParser;
 import SoftEng751.SoftEng751.io.SpoonLoopParser;
+import SoftEng751.SoftEng751.testMethods.DependencyVector;
 import org.apache.commons.io.FileUtils;
 
 import SoftEng751.SoftEng751.testMethods.AffineTransformation;
@@ -25,9 +26,10 @@ public class App
 
 		LoopParser loopParser = new SpoonLoopParser(str, "transformLoop");
 		List<LoopVar> loopvariables = loopParser.getLoopVars();
+		List<DependencyVector> dependencyVectors = loopParser.getDependencyVectors();
+
     	AffineTransformation m = new AffineTransformation();
 		List<LoopVar> transformedVariables = m.method(loopvariables);
-		
 		
 		CtClass parsedClass = Launcher.parseClass(str);
     	List<CtFor> loops = parsedClass.getMethod("transformLoop").getElements(new TypeFilter<CtFor>(CtFor.class));
