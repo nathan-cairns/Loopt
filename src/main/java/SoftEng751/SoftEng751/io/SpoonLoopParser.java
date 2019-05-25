@@ -52,6 +52,7 @@ public class SpoonLoopParser implements LoopParser {
     }
 
     public List<int[]> getDependencyVectors() {
+        this.printLoops();
         return null;
     }
 
@@ -62,5 +63,12 @@ public class SpoonLoopParser implements LoopParser {
         int upperbound = Integer.parseInt(expressions.get(3).toString());
 
         return new LoopVar(name, lowerbound, upperbound);
+    }
+
+    // For testing
+    private void printLoops() {
+        for (CtFor loop : this.loops) {
+            System.out.println(loop);
+        }
     }
 }
