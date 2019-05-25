@@ -15,6 +15,7 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
+import SoftEng751.SoftEng751.testMethods.DependencyVector;
 
 import SoftEng751.SoftEng751.testMethods.AffineTransformation;
 import SoftEng751.SoftEng751.testMethods.LoopVar;
@@ -52,6 +53,7 @@ public class App
 		
 		// Transformation
 		System.out.println("Creating affine transformation...");
+		List<DependencyVector> dependencyVectors = loopParser.getDependencyVectors();
     	AffineTransformation m = new AffineTransformation();
 		List<LoopVar> transformedVariables = m.method(loopvariables);
 		
