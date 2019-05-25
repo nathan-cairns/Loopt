@@ -9,13 +9,13 @@ public class LoopVar {
 	public String boundsName = "";
 
 	public LoopVar(String _name, int _lowerbound, int _upperbound){
-		
 		name = _name;
 		lowerbound = _lowerbound;
 		upperbound = _upperbound;
-		
-		
 	}
-	
+
+	public String getName() {
+		return this.name;
+	}
 	
 }
