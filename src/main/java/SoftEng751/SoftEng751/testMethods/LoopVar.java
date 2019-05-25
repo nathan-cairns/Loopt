@@ -7,11 +7,13 @@ public class LoopVar {
 	public int lowerbound;
 	public int upperbound;
 	public String boundsName = "";
+	public int dimension;
 
-	public LoopVar(String _name, int _lowerbound, int _upperbound){
+	public LoopVar(String _name, int _lowerbound, int _upperbound, int _dimension){
 		name = _name;
 		lowerbound = _lowerbound;
 		upperbound = _upperbound;
+		dimension = _dimension;
 	}
 
 	public String getName() {

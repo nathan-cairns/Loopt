@@ -44,10 +44,10 @@ public class SpoonLoopParser implements LoopParser {
         }
         List<LoopVar> loopVariables = new ArrayList<LoopVar>();
 
-        LoopVar i = this.getLoopVarFromLoop(this.loops.get(0));
+        LoopVar i = this.getLoopVarFromLoop(this.loops.get(0), 1);
         loopVariables.add(i);
         if (loops.size() > 1) {
-            LoopVar j = this.getLoopVarFromLoop(this.loops.get(1));
+            LoopVar j = this.getLoopVarFromLoop(this.loops.get(1), 2);
             loopVariables.add(j);
         }
 
@@ -111,12 +111,12 @@ public class SpoonLoopParser implements LoopParser {
                 .collect(Collectors.toList());
     }
 
-    private LoopVar getLoopVarFromLoop(CtFor loop) {
+    private LoopVar getLoopVarFromLoop(CtFor loop, int dimension) {
         List<CtExpression> expressions = loop.getElements(new TypeFilter<CtExpression>(CtExpression.class));
         String name = expressions.get(2).toString();
         int lowerbound = Integer.parseInt(expressions.get(0).toString());
         int upperbound = Integer.parseInt(expressions.get(3).toString());
 
-        return new LoopVar(name, lowerbound, upperbound);
+        return new LoopVar(name, lowerbound, upperbound, dimension);
     }
 }
