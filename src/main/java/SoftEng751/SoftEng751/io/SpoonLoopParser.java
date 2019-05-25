@@ -12,11 +12,11 @@ import java.util.List;
 
 public class SpoonLoopParser implements LoopParser {
 
-    private List<CtFor> loops = new ArrayList<>();
+    private List<CtFor> loops = new ArrayList<CtFor>();
 
     public SpoonLoopParser(String file, String methodName) throws Exception {
         CtClass parsedClass = Launcher.parseClass(file);
-        this.loops = parsedClass.getMethod(methodName).getElements(new TypeFilter<>(CtFor.class));
+        this.loops = parsedClass.getMethod(methodName).getElements(new TypeFilter<CtFor>(CtFor.class));
 
         if (this.loops.size() > 2) {
             throw new Exception("Error: Can only parse loops with max 2 nested levels");
@@ -27,7 +27,7 @@ public class SpoonLoopParser implements LoopParser {
         }
     }
 
-    @Override
+    
     public List<LoopVar> getLoopVars(){
         List<LoopVar> loopVariables = new ArrayList<LoopVar>();
 
@@ -41,7 +41,7 @@ public class SpoonLoopParser implements LoopParser {
     	return loopVariables;
     }
 
-    @Override
+    
     public List<int[]> getDependencyVectors() {
         return null;
     }
