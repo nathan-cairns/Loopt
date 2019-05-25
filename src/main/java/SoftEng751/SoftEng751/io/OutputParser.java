@@ -6,5 +6,5 @@ import spoon.reflect.code.CtFor;
 import java.util.List;
 
 public interface OutputParser {
-    void output(List<LoopVar> transformedLoopVars, CtFor originalLoop);
+    String output(List<LoopVar> transformedLoopVars, CtFor originalLoop);
 }

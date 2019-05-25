@@ -4,8 +4,8 @@ import SoftEng751.SoftEng751.testMethods.DependencyVector;
 import SoftEng751.SoftEng751.testMethods.LoopVar;
 import spoon.Launcher;
 import spoon.reflect.code.*;
-import spoon.reflect.declaration.CtClass;
 import spoon.reflect.visitor.filter.TypeFilter;
+import spoon.support.compiler.SnippetCompilationHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +16,15 @@ public class SpoonLoopParser implements LoopParser {
     private List<CtFor> loops;
     private List<LoopVar> loopVars;
 
-    public SpoonLoopParser(String file, String methodName) throws Exception {
-        CtClass parsedClass = Launcher.parseClass(file);
-        this.loops = parsedClass.getMethod(methodName).getElements(new TypeFilter<CtFor>(CtFor.class));
+    public SpoonLoopParser(String file) throws Exception {
+    	
+    	Launcher spoon = new Launcher();
+  
+    	
+    	CtStatement parsedCode = SnippetCompilationHelper.compileStatement(spoon.getFactory().Code().createCodeSnippetStatement(file));
 
+    	
+    	this.loops = parsedCode.getElements(new TypeFilter<CtFor>(CtFor.class));
         if (this.loops.size() > 2) {
             throw new Exception("Error: Can only parse loops with max 2 nested levels");
         }
@@ -27,6 +32,10 @@ public class SpoonLoopParser implements LoopParser {
         if (this.loops.size() < 1) {
             throw new Exception("Error: No loops found in file");
         }
+    }
+    
+    public CtFor getOutermostLoop() {
+    	return this.loops.get(0);
     }
 
     public List<LoopVar> getLoopVars(){

@@ -13,7 +13,7 @@ import spoon.Launcher;
 
 public class DefaultOutParser implements OutputParser {
 
-	public void output(List<LoopVar> transformedLoopVars, CtFor originalLoop) {
+	public String output(List<LoopVar> transformedLoopVars, CtFor originalLoop) {
 
 		Launcher spoon = new Launcher();
 		CtFor newFor = spoon.getFactory().Core().createFor();
@@ -53,7 +53,7 @@ public class DefaultOutParser implements OutputParser {
 			loop.getBody().insertBefore(varDefine);
 		}
 		
-		System.out.println(originalLoop.toString());
+		return originalLoop.toString();
 		
 	}
 	

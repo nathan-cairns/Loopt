@@ -12,33 +12,24 @@ import org.apache.commons.io.FileUtils;
 
 import SoftEng751.SoftEng751.testMethods.AffineTransformation;
 import SoftEng751.SoftEng751.testMethods.LoopVar;
-import spoon.Launcher;
-import spoon.reflect.code.CtFor;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.visitor.filter.TypeFilter;
 
 public class App 
 {
     public static void main( String[] args ) throws Exception
     {
-    	String str = FileUtils.readFileToString(new File("./src/main/java/SoftEng751/SoftEng751/testClass.java"));
-    	str = str.replaceAll("package SoftEng751.SoftEng751;", "");
-
-		LoopParser loopParser = new SpoonLoopParser(str, "transformLoop");
+    	// Input parsing
+    	String str = FileUtils.readFileToString(new File("./testFor.txt"));
+		LoopParser loopParser = new SpoonLoopParser(str);
 		List<LoopVar> loopvariables = loopParser.getLoopVars();
 		List<DependencyVector> dependencyVectors = loopParser.getDependencyVectors();
 
     	AffineTransformation m = new AffineTransformation();
 		List<LoopVar> transformedVariables = m.method(loopvariables);
 		
-		CtClass parsedClass = Launcher.parseClass(str);
-    	List<CtFor> loops = parsedClass.getMethod("transformLoop").getElements(new TypeFilter<CtFor>(CtFor.class));
-    	
+		// Output generation
     	OutputParser out = new DefaultOutParser();
-    	out.output(transformedVariables, loops.get(0));
-    	
-    	
-		
+    	String outString = out.output(transformedVariables, loopParser.getOutermostLoop());
+    	System.out.print(outString);
     }
     
 
