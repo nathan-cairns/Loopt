@@ -54,8 +54,9 @@ public class App
 		// Transformation
 		System.out.println("Creating affine transformation...");
 		List<DependencyVector> dependencyVectors = loopParser.getDependencyVectors();
+		
     	AffineTransformation m = new AffineTransformation();
-		List<LoopVar> transformedVariables = m.method(loopvariables);
+		List<LoopVar> transformedVariables = m.method(loopvariables, dependencyVectors);
 		
 		// Output generation
     	OutputParser out = new DefaultOutParser();

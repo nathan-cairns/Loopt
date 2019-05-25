@@ -13,17 +13,16 @@ import org.ejml.simple.SimpleMatrix;
 
 public class AffineTransformation {
 
-	public List<LoopVar> method(List<LoopVar> variables) {
-		
+	public List<LoopVar> method(List<LoopVar> variables, List<DependencyVector> dependencyVectors) {
 		Equation eq = new Equation();
 		DMatrixRMaj x = new DMatrixRMaj(4, 2); // fixed for 2vars
-		DMatrixRMaj dv = new DMatrixRMaj(2, 1);
+		
+		ArrayList<DMatrixRMaj> dv = generateDV(dependencyVectors, variables);
 		
 		DMatrixRMaj b = new DMatrixRMaj(4, 1);
 
-		eq.alias(x, "x", dv, "dv", b, "b");
+		eq.alias(x, "x", b, "b");
 		eq.process("x = [-1,0;1,0;0,-1;0,1]");
-		eq.process("dv = [1;-1]");
 		eq.process("b = [-1;6;-1;5]");
 		
 		DMatrixRMaj t = generateT(dv,eq); 
@@ -80,7 +79,33 @@ public class AffineTransformation {
 		return variables;
 	}
 
-	private DMatrixRMaj generateT(DMatrixRMaj dv, Equation eq){
+	private ArrayList<DMatrixRMaj> generateDV(List<DependencyVector> dependencyVectors, List<LoopVar> variables) {
+		
+		ArrayList<DMatrixRMaj> list = new ArrayList<DMatrixRMaj>();
+		
+		for(DependencyVector dvBox : dependencyVectors){
+			
+			DMatrixRMaj dv = new DMatrixRMaj(1, 2);
+			for(LoopVar var: variables)
+			{
+				
+				try {
+					dv.set(0, var.dimension - 1, dvBox.getDependencyDistance(var.getName()));
+				} catch (Exception e) {
+					dv.set(0, var.dimension - 1, 0);
+				}
+				
+			}
+			list.add(dv);
+		}
+		
+		return list;
+	}
+
+	private DMatrixRMaj generateT(ArrayList<DMatrixRMaj> dvList, Equation eq){
+		
+		DMatrixRMaj dv = dvList.get(0);
+		dvList.remove(0);
 		
 		int x = (int) dv.getData()[0];
 		int y = (int) dv.getData()[1];
@@ -101,7 +126,6 @@ public class AffineTransformation {
 			}
 			
 		}
-		System.out.println(commonMultiples.size());
 		
 		for(int testMultiple : commonMultiples){
 			int c = testMultiple / x;
@@ -112,26 +136,44 @@ public class AffineTransformation {
 				if((a*d - 1)%c == 0){
 					
 					int b = (a*d - 1)/c;
-					System.out.println(a + " " + b + " " + c + " " + d);
 					DMatrixRMaj t = new DMatrixRMaj(2, 2);
 					t.set(0, 0, a);
 					t.set(0, 1, b);
 					t.set(1, 0, c);
 					t.set(1, 1, d);
-					return t;
+					
+					if(dvList.size() > 0){
+						if(bruteTest(t, dvList)){
+							
+							return t;
+							
+						}
+					}
 					
 				}
 				
 				
 			}
 		}
-		
+		System.out.println("no transformations could be found");
 		return null;
 		
 		
 	}
 
-	private void bruteTest() {
+	private boolean bruteTest(DMatrixRMaj t, ArrayList<DMatrixRMaj> dvList) {
 
+	
+		for(DMatrixRMaj dvMatrix : dvList){
+			DMatrixRMaj c = new DMatrixRMaj(1,2);
+			CommonOps_DDRM.mult(dvMatrix,t, c);
+			if(c.get(0,1) == 0){
+				
+			return true;	
+				
+			}
+		}
+	
+		return false;
 	}
 }
