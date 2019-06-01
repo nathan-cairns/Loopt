@@ -14,25 +14,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * A concrete implementation of the LoopParser interface.
+ * This implementation uses spoon to parse the loops.
+ */
 public class SpoonLoopParser implements LoopParser {
-
-
     private List<CtFor> loops;
     private List<LoopVar> loopVars;
 
-    public SpoonLoopParser(String file) throws Exception {
-    	
+    /**
+     * Constructor.
+     *
+     * @param loop A string representation of the loop to parse.
+     * @throws Exception If loop exceeds 2 levels of nesting or if no loops were found.
+     */
+    public SpoonLoopParser(String loop) throws Exception {
     	Launcher spoon = new Launcher();
-  
-    	
-    	CtStatement parsedCode = SnippetCompilationHelper.compileStatement(spoon.getFactory().Code().createCodeSnippetStatement(file));
-
+    	CtStatement parsedCode = SnippetCompilationHelper.compileStatement(spoon.getFactory().Code().createCodeSnippetStatement(loop));
     	
     	this.loops = parsedCode.getElements(new TypeFilter<CtFor>(CtFor.class));
         if (this.loops.size() > 2) {
             throw new Exception("Error: Can only parse loops with max 2 nested levels");
         }
-
         if (this.loops.size() < 1) {
             throw new Exception("Error: No loops found in file");
         }
@@ -41,7 +44,6 @@ public class SpoonLoopParser implements LoopParser {
     public CtFor getOutermostLoop() {
     	return this.loops.get(0);
     }
-
 
     public List<LoopVar> getLoopVars(){
         if (this.loopVars != null) {
@@ -109,7 +111,11 @@ public class SpoonLoopParser implements LoopParser {
         return dependencyVectors;
     }
 
-
+    /**
+     * Helper function for retrieving the loop var names from the list of loop vars.
+     *
+     * @return A list of strings representing the names of the loop vars.
+     */
     private List<String> getLoopVarNames() {
         return this.getLoopVars()
                 .stream()
@@ -118,6 +124,14 @@ public class SpoonLoopParser implements LoopParser {
 
     }
 
+    /**
+     * A helper function which extracts the loop vars from a spoon for loop.
+     *
+     * @param loop The for loop to get extract the loop vars from
+     * @param dimension The dimension of the loop.
+     *
+     * @return The extracted loop var.
+     */
     private LoopVar getLoopVarFromLoop(CtFor loop, int dimension) {
         List<CtExpression> expressions = loop.getElements(new TypeFilter<CtExpression>(CtExpression.class));
         String name = expressions.get(2).toString();
