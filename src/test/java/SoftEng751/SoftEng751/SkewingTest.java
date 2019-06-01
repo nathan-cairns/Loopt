@@ -105,4 +105,11 @@ public class SkewingTest {
     	assertEquals(transformedVariables.get(0).transformedname,"i1");
     	assertEquals(transformedVariables.get(1).transformedname,"j1");
     }
+    
+    @Test
+    public void testOneVectorDiffDirection2() {
+    	transform(10);
+    	assertEquals(transformedVariables.get(0).transformedname,"i1");
+    	assertEquals(transformedVariables.get(1).transformedname,"i1-1 * j1 ");
+    }
 }

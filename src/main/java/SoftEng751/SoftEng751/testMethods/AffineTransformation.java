@@ -113,7 +113,7 @@ public class AffineTransformation {
 		
 		ArrayList<Integer> commonMultiples = new ArrayList<Integer>();
 		
-		for(int i = 1; i < 1000; i++){
+		for(int i = 0; i < 1000; i++){
 		
 			int temp = x * y;
 			if(x == 0 || y == 0){
@@ -141,9 +141,9 @@ public class AffineTransformation {
 			for(int a = 1; a < 100; a++){
 				
 
-				if((a*d - 1)%c == 0){
+				if(Math.abs(a*d) == 1){
 					
-					int b = (a*d - 1)/c;
+					int b = 0;
 					DMatrixRMaj t = new DMatrixRMaj(2, 2);
 					t.set(0, 0, a);
 					t.set(0, 1, b);
