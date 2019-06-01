@@ -47,13 +47,13 @@ public class SpoonLoopParser implements LoopParser {
 
     public List<LoopVar> getLoopVars(){
         if (this.loopVars != null) {
-            return loopVars;
+            return this.loopVars;
         }
         List<LoopVar> loopVariables = new ArrayList<LoopVar>();
 
         LoopVar i = this.getLoopVarFromLoop(this.loops.get(0), 1);
         loopVariables.add(i);
-        if (loops.size() > 1) {
+        if (this.loops.size() > 1) {
             LoopVar j = this.getLoopVarFromLoop(this.loops.get(1), 2);
             loopVariables.add(j);
         }
