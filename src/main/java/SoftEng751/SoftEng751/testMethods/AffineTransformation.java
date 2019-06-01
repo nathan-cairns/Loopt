@@ -85,14 +85,14 @@ public class AffineTransformation {
 		
 		for(DependencyVector dvBox : dependencyVectors){
 			
-			DMatrixRMaj dv = new DMatrixRMaj(1, 2);
+			DMatrixRMaj dv = new DMatrixRMaj(2, 1);
 			for(LoopVar var: variables)
 			{
 				
 				try {
-					dv.set(0, var.dimension - 1, dvBox.getDependencyDistance(var.getName()));
+					dv.set(var.dimension - 1, 0, dvBox.getDependencyDistance(var.getName()));
 				} catch (Exception e) {
-					dv.set(0, var.dimension - 1, 0);
+					dv.set(var.dimension - 1, 0, 0);
 				}
 				
 			}
@@ -105,6 +105,7 @@ public class AffineTransformation {
 	private DMatrixRMaj generateT(ArrayList<DMatrixRMaj> dvList, Equation eq){
 		
 		DMatrixRMaj dv = dvList.get(0);
+		System.out.println(dv);
 		dvList.remove(0);
 		
 		int x = (int) dv.getData()[0];
@@ -112,10 +113,17 @@ public class AffineTransformation {
 		
 		ArrayList<Integer> commonMultiples = new ArrayList<Integer>();
 		
-		for(int i = 1; i < 100; i++){
+		for(int i = 1; i < 1000; i++){
 		
 			int temp = x * y;
-			if(x*i % Math.abs(y) == 0)
+			if(x == 0 || y == 0){
+				
+				System.out.println("No skewing transformation found for this case");
+				return null;
+				
+				
+			}
+			else if(x*i % Math.abs(y) == 0)
 			{
 				commonMultiples.add(x*i);
 			}
@@ -148,6 +156,11 @@ public class AffineTransformation {
 							return t;
 							
 						}
+					}else {
+						
+						return t;
+
+						
 					}
 					
 				}
@@ -165,15 +178,17 @@ public class AffineTransformation {
 
 	
 		for(DMatrixRMaj dvMatrix : dvList){
-			DMatrixRMaj c = new DMatrixRMaj(1,2);
-			CommonOps_DDRM.mult(dvMatrix,t, c);
-			if(c.get(0,1) == 0){
+			DMatrixRMaj c = new DMatrixRMaj(2,1);
+			CommonOps_DDRM.mult(t,dvMatrix, c);
+			
+			if(c.get(1,0) == 0){
 				
 			return true;	
 				
 			}
+
 		}
-	
+		
 		return false;
 	}
 }

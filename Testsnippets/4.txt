@@ -4,6 +4,6 @@ int[][] array = {};
 
 for(int outer = 1; outer < 6; outer++) {
 	for (int inner = 1; inner < 5; inner++) {
-		A[outer][inner] = A[outer - 1][inner + 1] + 1;
+		array [outer][inner] = array[outer - 1][inner + 1] + 1;
 	}
 }
