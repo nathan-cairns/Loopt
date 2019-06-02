@@ -1,10 +1,11 @@
 package SoftEng751.SoftEng751.io;
 
-import SoftEng751.SoftEng751.testMethods.DependencyVector;
-import SoftEng751.SoftEng751.testMethods.LoopVar;
 import spoon.reflect.code.CtFor;
 
 import java.util.List;
+
+import SoftEng751.SoftEng751.polyhedral.DependencyVector;
+import SoftEng751.SoftEng751.polyhedral.LoopVar;
 
 /**
  * This interface outlines the methods required to extract the loop bounds and dependency vectors from a loop.

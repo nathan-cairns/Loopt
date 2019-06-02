@@ -1,4 +1,4 @@
-package SoftEng751.SoftEng751.testMethods;
+package SoftEng751.SoftEng751.polyhedral;
 
 public class LoopVar {
 

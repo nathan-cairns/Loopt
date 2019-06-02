@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import SoftEng751.SoftEng751.testMethods.LoopVar;
+import SoftEng751.SoftEng751.polyhedral.LoopVar;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtFor;
 import spoon.reflect.code.CtStatement;

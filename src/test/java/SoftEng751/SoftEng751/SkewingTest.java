@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import SoftEng751.SoftEng751.io.LoopParser;
 import SoftEng751.SoftEng751.io.SpoonLoopParser;
-import SoftEng751.SoftEng751.testMethods.AffineTransformation;
-import SoftEng751.SoftEng751.testMethods.DependencyVector;
-import SoftEng751.SoftEng751.testMethods.LoopVar;
+import SoftEng751.SoftEng751.polyhedral.AffineTransformation;
+import SoftEng751.SoftEng751.polyhedral.DependencyVector;
+import SoftEng751.SoftEng751.polyhedral.LoopVar;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +40,7 @@ public class SkewingTest {
     	List<DependencyVector> dependencyVectors = parser.getDependencyVectors();
 		
     	AffineTransformation m = new AffineTransformation();
-		transformedVariables = m.method(loopvariables, dependencyVectors);
+		transformedVariables = m.skew(loopvariables, dependencyVectors);
 	}
 	
     @Test

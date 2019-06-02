@@ -1,19 +1,14 @@
-package SoftEng751.SoftEng751.testMethods;
+package SoftEng751.SoftEng751.polyhedral;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import org.ejml.data.DMatrixRMaj;
 import org.ejml.dense.row.CommonOps_DDRM;
-import org.ejml.equation.Equation;
-import org.ejml.simple.SimpleMatrix;
 
 public class AffineTransformation {
 
-	public List<LoopVar> method(List<LoopVar> variables, List<DependencyVector> dependencyVectors) {
+	public List<LoopVar> skew(List<LoopVar> variables, List<DependencyVector> dependencyVectors) {
 		
 		//retrieve the a list of dependency vector matrix
 		ArrayList<DMatrixRMaj> dv = generateDV(dependencyVectors, variables);
@@ -138,8 +133,6 @@ public class AffineTransformation {
 		
 		//attempt to generate a list of multiples 
 		for(int i = 0; i < 1000; i++){
-		
-			int temp = x * y;
 			
 			//check for common multiple between 2 values of dv
 			if(x*i % Math.abs(y) == 0)

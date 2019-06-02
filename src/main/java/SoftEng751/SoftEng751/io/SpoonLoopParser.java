@@ -1,7 +1,5 @@
 package SoftEng751.SoftEng751.io;
 
-import SoftEng751.SoftEng751.testMethods.DependencyVector;
-import SoftEng751.SoftEng751.testMethods.LoopVar;
 import spoon.Launcher;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtFor;
@@ -13,6 +11,9 @@ import spoon.support.compiler.SnippetCompilationHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import SoftEng751.SoftEng751.polyhedral.DependencyVector;
+import SoftEng751.SoftEng751.polyhedral.LoopVar;
 
 /**
  * A concrete implementation of the LoopParser interface.

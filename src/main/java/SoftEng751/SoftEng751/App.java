@@ -9,16 +9,15 @@ import SoftEng751.SoftEng751.io.DefaultOutParser;
 import SoftEng751.SoftEng751.io.LoopParser;
 import SoftEng751.SoftEng751.io.OutputParser;
 import SoftEng751.SoftEng751.io.SpoonLoopParser;
+import SoftEng751.SoftEng751.polyhedral.AffineTransformation;
+import SoftEng751.SoftEng751.polyhedral.DependencyVector;
+import SoftEng751.SoftEng751.polyhedral.LoopVar;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
-import SoftEng751.SoftEng751.testMethods.DependencyVector;
-
-import SoftEng751.SoftEng751.testMethods.AffineTransformation;
-import SoftEng751.SoftEng751.testMethods.LoopVar;
 
 public class App 
 {
@@ -56,7 +55,7 @@ public class App
 		List<DependencyVector> dependencyVectors = loopParser.getDependencyVectors();
 		
     	AffineTransformation m = new AffineTransformation();
-		List<LoopVar> transformedVariables = m.method(loopvariables, dependencyVectors);
+		List<LoopVar> transformedVariables = m.skew(loopvariables, dependencyVectors);
 		
 		// Output generation
     	OutputParser out = new DefaultOutParser();
