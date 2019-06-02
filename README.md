@@ -6,7 +6,7 @@ In the lectures we have learnt about dependences in loops. For the examples give
 
 ## Running Loopt
 
-Download the [jar]() // TODO link to jar in github release
+Download the latest jar from [releases](https://github.com/Nathan-Cairns/Loopt/releases).
 
 Run the Jar from the command line
 
